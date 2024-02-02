@@ -1,0 +1,832 @@
+[
+    {
+      "id": 7790920008707,
+      "Nombre": "PICADILLO DE CARNE",
+      "Marca": "SAFRA",
+      "Precio": 320,
+      "Categoria": "ALMENTO",
+      "Cantidad": 18,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 14:58"
+    },
+    {
+      "id": 7794000006478,
+      "Nombre": "MOSTAZA 250G",
+      "Marca": "SAVORA",
+      "Precio": 750,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 14:59"
+    },
+    {
+      "id": 7790250097396,
+      "Nombre": "TOALLITA FEMENINA X8",
+      "Marca": "LADYSOFT",
+      "Precio": 950,
+      "Categoria": "HIGIENE PERSONAL",
+      "Cantidad": 5,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:00"
+    },
+    {
+      "id": 7795422000082,
+      "Nombre": "ALCOHOL ETILICO",
+      "Marca": "FRAU",
+      "Precio": 850,
+      "Categoria": "HIGIENE PERSONAL",
+      "Cantidad": 10,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:01"
+    },
+    {
+      "id": 7798058690108,
+      "Nombre": "DULCE DE LECHE 400G",
+      "Marca": "EL QUEBAHAL",
+      "Precio": 1330,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:02"
+    },
+    {
+      "id": 7790070336453,
+      "Nombre": "FIDEOS FUSILLI 500G",
+      "Marca": "TERRABUSI",
+      "Precio": 980,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 3,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:04"
+    },
+    {
+      "id": 7792750000357,
+      "Nombre": "CABALLA NATURAL",
+      "Marca": "MARBELLA",
+      "Precio": 2200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:05"
+    },
+    {
+      "id": 7790040136243,
+      "Nombre": "CEREALES DE SALVADO X3",
+      "Marca": "BAGLEY",
+      "Precio": 1950,
+      "Categoria": "GALLETITA",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:07"
+    },
+    {
+      "id": 7790150211908,
+      "Nombre": "TE 25U",
+      "Marca": "LA VIRGINIA",
+      "Precio": 460,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 7,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:09"
+    },
+    {
+      "id": 7793046004141,
+      "Nombre": "DULCE DE MEMBRILO",
+      "Marca": "DULCOR",
+      "Precio": 1050,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 3,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:10"
+    },
+    {
+      "id": 7798048730395,
+      "Nombre": "SURTIDAS",
+      "Marca": "SURTIDAS",
+      "Precio": 690,
+      "Categoria": "GALLETITA",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:11"
+    },
+    {
+      "id": 7793046015024,
+      "Nombre": "TOMATE TRITURADO 960G",
+      "Marca": "DULCOR",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:13"
+    },
+    {
+      "id": 7790070336538,
+      "Nombre": "FIDEOS MOSTACHOL MIX VEGETALES 500G",
+      "Marca": "TERRABUSI",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 3,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:27"
+    },
+    {
+      "id": 7790953000143,
+      "Nombre": "SALVADO",
+      "Marca": "MIRGAL",
+      "Precio": 980,
+      "Categoria": "GALLETITA",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:29"
+    },
+    {
+      "id": 7790314004346,
+      "Nombre": "VINO TINTO CAJA",
+      "Marca": "ZUMUVA",
+      "Precio": 0,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:31"
+    },
+    {
+      "id": 7798156760642,
+      "Nombre": "POROTO ALBIA 340G",
+      "Marca": "SABORES DEL VALLE",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:34"
+    },
+    {
+      "id": 7798156760062,
+      "Nombre": "PURE DE TOMATE 520G",
+      "Marca": "SABORES DEL VALLE",
+      "Precio": 490,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:35"
+    },
+    {
+      "id": 7793123160036,
+      "Nombre": "OBLITA",
+      "Marca": "OBLITA",
+      "Precio": 350,
+      "Categoria": "GALLETITA",
+      "Cantidad": 5,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:36"
+    },
+    {
+      "id": 7622201735296,
+      "Nombre": "OREO 118G",
+      "Marca": "OREO",
+      "Precio": 990,
+      "Categoria": "GALLETITA",
+      "Cantidad": 7,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:39"
+    },
+    {
+      "id": 7790036006277,
+      "Nombre": "DULCE DAMASCO 454G",
+      "Marca": "BAGGIO",
+      "Precio": 1330,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:39"
+    },
+    {
+      "id": 7798142740030,
+      "Nombre": "VINAGRE DE VINO 960ML",
+      "Marca": "SILVA",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 7,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:40"
+    },
+    {
+      "id": 7790070336460,
+      "Nombre": "FIDEOS SPAGHETTI 500G",
+      "Marca": "TERRABUSI",
+      "Precio": 1300,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 11,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:42"
+    },
+    {
+      "id": 7798096031055,
+      "Nombre": "ARVEJAS 340G",
+      "Marca": "DOÑA PUPA",
+      "Precio": 520,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 14,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:43"
+    },
+    {
+      "id": 7793123160753,
+      "Nombre": "OBLITA",
+      "Marca": "LA OBLEA",
+      "Precio": 350,
+      "Categoria": "GALLETITA",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:44"
+    },
+    {
+      "id": 7794940000833,
+      "Nombre": "ELDUCORANTE 200ML",
+      "Marca": "HILERET",
+      "Precio": 1850,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 5,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:46"
+    },
+    {
+      "id": 7792350004533,
+      "Nombre": "CHOCLO BLANCO CREMOSO 350G",
+      "Marca": "INALPA",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 10,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:47"
+    },
+    {
+      "id": 7798031155679,
+      "Nombre": "FIDEOS MOSTACHOLL 500G",
+      "Marca": "KNORR",
+      "Precio": 820,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 3,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:48"
+    },
+    {
+      "id": 7794000006737,
+      "Nombre": "CALDO DE GALLINA 12U",
+      "Marca": "KNORR",
+      "Precio": 1100,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:48"
+    },
+    {
+      "id": 7790940003034,
+      "Nombre": "ALGODON",
+      "Marca": "DONCELLA",
+      "Precio": 890,
+      "Categoria": "HIGIENE PERSONAL",
+      "Cantidad": 13,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:49"
+    },
+    {
+      "id": 7793046008071,
+      "Nombre": "DULCE DE CIRUELA 500G",
+      "Marca": "DULCOR",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:50"
+    },
+    {
+      "id": 7790628102714,
+      "Nombre": "FAUNA SURTIDAS",
+      "Marca": "MAURI",
+      "Precio": 690,
+      "Categoria": "GALLETITA",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:51"
+    },
+    {
+      "id": 7790040139268,
+      "Nombre": "RUMBA",
+      "Marca": "BAGLEY",
+      "Precio": 780,
+      "Categoria": "GALLETITA",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:52"
+    },
+    {
+      "id": 7790314004353,
+      "Nombre": "VINO BLANCO CAJA",
+      "Marca": "ZUMUVA",
+      "Precio": 0,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:53"
+    },
+    {
+      "id": 7790314057083,
+      "Nombre": "VINO BLANCO CAJA",
+      "Marca": "ARIZU",
+      "Precio": 0,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:54"
+    },
+    {
+      "id": 7790717152002,
+      "Nombre": "NOVECENTO",
+      "Marca": "MALBEC",
+      "Precio": 2100,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:56"
+    },
+    {
+      "id": 7792750000340,
+      "Nombre": "CABALLA EN ACEITE",
+      "Marca": "MARBELLA",
+      "Precio": 2200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 9,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:56"
+    },
+    {
+      "id": 7798156760024,
+      "Nombre": "ARVEJAS 340G",
+      "Marca": "SABORES DEL VALLE",
+      "Precio": 620,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 3,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:57"
+    },
+    {
+      "id": 7793046008033,
+      "Nombre": "DULCE DE NARANJA 500G",
+      "Marca": "DULCOR",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 5,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:58"
+    },
+    {
+      "id": 7622201735906,
+      "Nombre": "PEPITOS",
+      "Marca": "PEPITOS",
+      "Precio": 850,
+      "Categoria": "GALLETITA",
+      "Cantidad": 9,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 15:59"
+    },
+    {
+      "id": 7798022225459,
+      "Nombre": "PAPEL HIGIENICO",
+      "Marca": "MY HOGAR",
+      "Precio": 1900,
+      "Categoria": "HIGIENE PERSONAL",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 16:01"
+    },
+    {
+      "id": 7790770602070,
+      "Nombre": "TOALLITA FEMENINA X8",
+      "Marca": "CALIPSO",
+      "Precio": 750,
+      "Categoria": "HIGIENE PERSONAL",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 16:00"
+    },
+    {
+      "id": 7798137250049,
+      "Nombre": "MIEL 250G",
+      "Marca": "EL PASE DE LA REINA",
+      "Precio": 1330,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 16:02"
+    },
+    {
+      "id": 7730908401526,
+      "Nombre": "JUGO EN POLVO 15G",
+      "Marca": "RINDE DOS",
+      "Precio": 450,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 24,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 16:03"
+    },
+    {
+      "id": 7790070508805,
+      "Nombre": "MATE COCIDO 25U",
+      "Marca": "NOBLESA GAUCHA",
+      "Precio": 520,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 7,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 16:05"
+    },
+    {
+      "id": 7791843008294,
+      "Nombre": "VINO TINTO VIÑAR DEL BALBO",
+      "Marca": "BALBO",
+      "Precio": 2100,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 3,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 16:06"
+    },
+    {
+      "id": 7790953000150,
+      "Nombre": "SELECTAS SURTIDAS",
+      "Marca": "MIRGAL",
+      "Precio": 1200,
+      "Categoria": "GALLETITA",
+      "Cantidad": 3,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "16 de enero de 2024 16:07"
+    },
+    {
+      "id": 7790150006306,
+      "Nombre": "CAFE MOLIDO 180G",
+      "Marca": "LA VIGIRNIA",
+      "Precio": 1150,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:23"
+    },
+    {
+      "id": 7790953000020,
+      "Nombre": "MIRGALITA",
+      "Marca": "MIRGAL",
+      "Precio": 480,
+      "Categoria": "GALLETITA",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:24"
+    },
+    {
+      "id": 7793319040425,
+      "Nombre": "DULCE DE LECHE 200G",
+      "Marca": "SANTA LUCIA",
+      "Precio": 750,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:25"
+    },
+    {
+      "id": 7790040136250,
+      "Nombre": "CEREALES DE SALVADO",
+      "Marca": "BAGLEY",
+      "Precio": 950,
+      "Categoria": "GALLETITA",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:27"
+    },
+    {
+      "id": 7790907000823,
+      "Nombre": "MANKIN",
+      "Marca": "BENJAMIN",
+      "Precio": 550,
+      "Categoria": "GALLETITA",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:28"
+    },
+    {
+      "id": 7622300724269,
+      "Nombre": "FIDEOS MOSTACHOL 500G",
+      "Marca": "TERRABUSI",
+      "Precio": 980,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:29"
+    },
+    {
+      "id": 7790349851311,
+      "Nombre": "SURTIDAS",
+      "Marca": "ZUPAY",
+      "Precio": 690,
+      "Categoria": "GALLETITA",
+      "Cantidad": 5,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:30"
+    },
+    {
+      "id": 7790040133488,
+      "Nombre": "SONRISAS",
+      "Marca": "BAGLEY",
+      "Precio": 780,
+      "Categoria": "GALLETITA",
+      "Cantidad": 11,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:39"
+    },
+    {
+      "id": 7790040133686,
+      "Nombre": "MEDIA TARDE",
+      "Marca": "LIA",
+      "Precio": 260,
+      "Categoria": "GALLETITA",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:31"
+    },
+    {
+      "id": 7791818001718,
+      "Nombre": "ROLLOS DE COCINA X3",
+      "Marca": "VUAL",
+      "Precio": 1900,
+      "Categoria": "COCINA",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:32"
+    },
+    {
+      "id": 7790953000013,
+      "Nombre": "RICK'S 130G",
+      "Marca": "MIRGAL",
+      "Precio": 280,
+      "Categoria": "GALLETITA",
+      "Cantidad": 14,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:33"
+    },
+    {
+      "id": 7790077000364,
+      "Nombre": "MAGNALENAS",
+      "Marca": "POZO",
+      "Precio": 1100,
+      "Categoria": "GALLETITA",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:33"
+    },
+    {
+      "id": 7790040887602,
+      "Nombre": "MEDIA TARDE X3",
+      "Marca": "LIA",
+      "Precio": 1250,
+      "Categoria": "GALLETITA",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:34"
+    },
+    {
+      "id": 7794000006720,
+      "Nombre": "CALDO DE VERDURAS 12U",
+      "Marca": "KNORR",
+      "Precio": 1100,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:35"
+    },
+    {
+      "id": 7790040139305,
+      "Nombre": "MELLISAS",
+      "Marca": "BAGLEY",
+      "Precio": 850,
+      "Categoria": "GALLETITA",
+      "Cantidad": 7,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:36"
+    },
+    {
+      "id": 7792350067033,
+      "Nombre": "CHOCLO AMARILLO",
+      "Marca": "INALPA",
+      "Precio": 1200,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 7,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:36"
+    },
+    {
+      "id": 7793046001416,
+      "Nombre": "DULCE DE BATATA 500G",
+      "Marca": "DULCOR",
+      "Precio": 1050,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:38"
+    },
+    {
+      "id": 7790170924642,
+      "Nombre": "TE BOLDO 20U",
+      "Marca": "MORENITA",
+      "Precio": 950,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 5,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:41"
+    },
+    {
+      "id": 7790847000013,
+      "Nombre": "ARROZ FINO 1KG",
+      "Marca": "PERSEGUIDO",
+      "Precio": 1800,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:41"
+    },
+    {
+      "id": 7793450000524,
+      "Nombre": "RONDA",
+      "Marca": "HOJAMAR",
+      "Precio": 850,
+      "Categoria": "GALLETITA",
+      "Cantidad": 11,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:42"
+    },
+    {
+      "id": 7796321101016,
+      "Nombre": "AZUCAR 1KG",
+      "Marca": "CONTINENTAL",
+      "Precio": 1500,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 34,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:43"
+    },
+    {
+      "id": 7790150320266,
+      "Nombre": "TE DE TILO 25U",
+      "Marca": "LA VIRGINIA",
+      "Precio": 950,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:44"
+    },
+    {
+      "id": 7790040872103,
+      "Nombre": "TRAVIATA",
+      "Marca": "BAGLEY",
+      "Precio": 490,
+      "Categoria": "GALLETITA",
+      "Cantidad": 1,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:44"
+    },
+    {
+      "id": 7792882000201,
+      "Nombre": "QUESO RAYADO",
+      "Marca": "LA QUESADA",
+      "Precio": 690,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 10,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:45"
+    },
+    {
+      "id": 7792180001641,
+      "Nombre": "ACEITE 900ML",
+      "Marca": "CAÑUEALAS",
+      "Precio": 2100,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 9,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:46"
+    },
+    {
+      "id": 7792763000450,
+      "Nombre": "VELAS 4U",
+      "Marca": "TEA",
+      "Precio": 970,
+      "Categoria": "OTRO",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:47"
+    },
+    {
+      "id": 7790907000885,
+      "Nombre": "PEPAS MEMBRILLO 160G",
+      "Marca": "BENJAMIN",
+      "Precio": 550,
+      "Categoria": "GALLETITA",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:48"
+    },
+    {
+      "id": 7790040133259,
+      "Nombre": "MANÁ",
+      "Marca": "ARCOR",
+      "Precio": 990,
+      "Categoria": "GALLETITA",
+      "Cantidad": 5,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:49"
+    },
+    {
+      "id": 7790314000324,
+      "Nombre": "VINO TINTO CAJA",
+      "Marca": "NATIVO",
+      "Precio": 0,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:50"
+    },
+    {
+      "id": 7790907000823,
+      "Nombre": "ANILLO COCO",
+      "Marca": "BENJAMIN",
+      "Precio": 550,
+      "Categoria": "GALLETITA",
+      "Cantidad": 4,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:50"
+    },
+    {
+      "id": 7790770601165,
+      "Nombre": "TOALLITA FEMENINA X20",
+      "Marca": "CALIPSO",
+      "Precio": 750,
+      "Categoria": "HIGIENE PERSONAL",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:51"
+    },
+    {
+      "id": 7790590016286,
+      "Nombre": "FOSFORO DE MADERA",
+      "Marca": "TRES PATITOS",
+      "Precio": 0,
+      "Categoria": "COCINA",
+      "Cantidad": 8,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:52"
+    },
+    {
+      "id": 7790314063848,
+      "Nombre": "VINO BLANCO CAJA",
+      "Marca": "TORO",
+      "Precio": 0,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:54"
+    },
+    {
+      "id": 7791620187693,
+      "Nombre": "KETCHUP 220G",
+      "Marca": "DANICA",
+      "Precio": 1050,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:54"
+    },
+    {
+      "id": 7790989000018,
+      "Nombre": "PAN DE CARNE",
+      "Marca": "CHANGUITO",
+      "Precio": 2100,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 6,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:55"
+    },
+    {
+      "id": 7790314074219,
+      "Nombre": "VINO TINTO BOTELLA",
+      "Marca": "TORO",
+      "Precio": 2100,
+      "Categoria": "BEBIDA ALCOHOLICA",
+      "Cantidad": 2,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:56"
+    },
+    {
+      "id": 7794000006065,
+      "Nombre": "MAYONESA 237G",
+      "Marca": "HELLMANN'S",
+      "Precio": 1050,
+      "Categoria": "ALIMENTO",
+      "Cantidad": 10,
+      "Fecha": "15 de enero de 2024",
+      "Fecha de edición": "17 de enero de 2024 16:56"
+    }
+  ]
