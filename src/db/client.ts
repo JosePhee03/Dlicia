@@ -1,5 +1,5 @@
 import { createClient } from "@libsql/client"
-import { Categoria, CreateControlPrecio, CreateControlStrock, CreateProducto, Marca } from "./types-db";
+import { SUMMARY_COLUMN, Categoria, CreateControlPrecio, CreateControlStrock, CreateProducto, DIRECTION, Marca, Summary, SummaryParams, SummaryResponse } from "./types-db";
 
 const client = createClient({
     url: import.meta.env.VITE_DATABASE_URL ?? "",
@@ -70,4 +70,42 @@ export const postControlPrecio = async ({productoId, precio }: CreateControlPrec
   const result = await client.execute(inserts)
 
   return result
+}
+
+export const getSummary = async ({ page = 0, limit = 20, sort = SUMMARY_COLUMN.FECHA, direction = DIRECTION.DESC }: SummaryParams): Promise<SummaryResponse> => {
+  const offset = page * limit
+  
+  const sql = "SELECT Producto.id AS codebar, Producto.producto AS producto, Marca.marca AS marca, Categoria.categoria AS categoria, Control_Stock.cantidad AS cantidad, Control_Precio.precio AS precio, MAX(Control_precio.fecha) AS fecha FROM Producto LEFT JOIN Marca ON Producto.marca_id = Marca.id LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id LEFT JOIN Control_Precio ON Producto.id = Control_precio.producto_id LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id GROUP BY Producto.id ORDER BY fecha DESC LIMIT $limit OFFSET $offset"
+
+  const selects = {
+    sql,
+    args: {limit, offset}
+  }
+
+    const result = await client.execute(selects);
+
+  const summary: Summary[] = result.rows.map(row => ({
+    codebar: row.codebar as number,
+    producto: row.producto as string,
+    marca: row.marca as string,
+    categoria: row.categoria as string,
+    cantidad: row.cantidad as number,
+    precio: row.precio as number,
+    fecha: new Date(row.fecha as string)
+  }));
+
+  const summaryResponse: SummaryResponse = {
+    content: summary,
+    limit,
+    page,
+    offset,
+    size: result.rows.length,
+    next: page + 1,
+    preview: Math.max(page - 1, 0),
+    direction,
+    sort
+  }
+
+  return summaryResponse
+
 }

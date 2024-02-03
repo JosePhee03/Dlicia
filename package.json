@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tw": "npx tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch"
   },
   "dependencies": {
     "@libsql/client": "^0.4.3",
