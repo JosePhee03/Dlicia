@@ -3,7 +3,7 @@ import { ChangeEvent } from "preact/compat"
 interface InputProps {
     type: "button" | "number" | "text",
     placeholder?: string,
-    value: string,
+    value: string | number,
     name: string,
     id: string,
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void,

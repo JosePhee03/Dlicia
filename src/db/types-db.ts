@@ -13,6 +13,8 @@ export interface CreateProducto {
     producto: string
     categoriaId: number
     marcaId: number
+    cantidad: number
+    precio: number
 }
 
 export interface CreateControlStrock {
@@ -30,7 +32,7 @@ export enum DIRECTION {
     DESC = "DESC"
 }
 
-export enum SUMMARY_COLUMN {
+export enum PRODUCTO_COLUMN {
     CODEBAR = "codebar",
     PRODUCTO = "producto",
     MARCA = "marca",
@@ -40,14 +42,14 @@ export enum SUMMARY_COLUMN {
     FECHA = "fecha"
 }
 
-export interface SummaryParams {
+export interface ProductoSummaryParams {
     limit: number,
     page: number,
-    direction:string
+    direction: string
     sort: string
 }
 
-export interface Summary {
+export interface Producto {
     codebar: number
     producto: string
     marca: Marca["marca"]
@@ -55,10 +57,10 @@ export interface Summary {
     cantidad: number
     precio: number
     fecha: Date
-} 
+}
 
-export interface SummaryResponse {
-    content: Summary[]
+export interface Page<T> {
+    content: T[]
     limit: number
     page: number
     offset: number

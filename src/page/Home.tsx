@@ -4,17 +4,17 @@ import { ChangeEvent } from "preact/compat";
 import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
-import { getSummary } from "../db/client";
-import { DIRECTION, SUMMARY_COLUMN, Summary } from "../db/types-db";
+import { getProductos } from "../db/client";
+import { DIRECTION, PRODUCTO_COLUMN, Producto } from "../db/types-db";
 
 export function Home() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
-  const [summary, setSummary] = useState<Summary[]>([])
+  const [producto, setProducto] = useState<Producto[]>([])
   const [page, setPage] = useState<number>(0)
   const [direction, setDirection] = useState<string>(DIRECTION.DESC)
   const [limit, setLimit] = useState<number>(20)
-  const [sort, setSort] = useState<string>(SUMMARY_COLUMN.FECHA)
+  const [sort, setSort] = useState<string>(PRODUCTO_COLUMN.FECHA)
   const [next, setNext] = useState<number>()
   const [preview, setPreview] = useState<number>()
 
@@ -40,9 +40,9 @@ export function Home() {
   }
 
   useEffect(() => {
-    getSummary({ direction, limit, page, sort })
+    getProductos({ direction, limit, page, sort })
       .then(response => {
-        setSummary(response.content)
+        setProducto(response.content)
         setPage(response.page)
         setLimit(response.limit)
         setNext(response.next)
@@ -95,7 +95,7 @@ export function Home() {
             </thead>
 
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-              {summary.map(({ cantidad, categoria, codebar, fecha, marca, precio, producto }, index) => {
+              {producto.map(({ cantidad, categoria, codebar, fecha, marca, precio, producto }, index) => {
                 const divider = "[&>*]:whitespace-nowrap [&>*]:px-4 [&>*]:py-2"
                 function formatearFecha(fecha: Date) {
                   const dia = fecha.getDate();
