@@ -18,8 +18,8 @@ export function Modal(props: ModalProps) {
 		<div className="relative z-50 modal-content" >
 			<div className="fixed inset-0 bg-black/30" aria-hidden="true">
 				<div className="fixed inset-0 w-screen overflow-y-auto">
-					<div className="flex min-h-full items-center justify-center p-4">
-						<form onSubmit={(e) => onSubmit(e)} className="flex flex-col m-auto sm:min-w-80 sm:min-h-96 w-screen h-screen rounded p-8 bg-white shadow-md">
+					<div className="flex h-auto items-center justify-center p-4">
+						<form onSubmit={(e) => onSubmit(e)} className="flex flex-col min-w-96 gap-8 rounded p-8 bg-white shadow-md">
 							<head className="w-full font-bold text-xl flex justify-center items-center">
 								{titleModal}
 							</head>

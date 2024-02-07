@@ -6,6 +6,7 @@ import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
 import { getProductos } from "../db/client";
 import { DIRECTION, PRODUCTO_COLUMN, Producto } from "../db/types-db";
+import { CodebarScanner } from "../components/CodebarScanner";
 
 export function Home() {
   const [open, setOpen] = useState(false);
@@ -54,13 +55,18 @@ export function Home() {
       .catch(response => console.log(response))
   }, [])
 
+  const getCodeScanner = (code: string) => {
+    setValue(code)
+  }
+
   return (
     <main className="max-w-[640px] py-8 h-screen mx-auto flex flex-col gap-4">
       <h1 className="font-bold text-4xl">D'licia</h1>
       <Button className="max-w-64" type="button" onClick={handleOpen} title="Buscar producto">Buscar Producto</Button>
       <Modal isOpen={open} onClose={handleClose} onSubmit={handleSubmit} titleModal="Buscar Producto">
         <Input label="Código de barras" onChange={handleChange} type="number" name="barcode" id="input-barcode" value={value} placeholder="77891235438734"></Input>
-        <Button className="w-full" type="button" onClick={barcodeScan} title="Escanear producto">Escanear producto</Button>
+        <label>Escanear Código de barras</label>
+        <CodebarScanner onScanner={getCodeScanner} />
       </Modal>
 
       <div class="rounded-lg border border-gray-200 dark:border-gray-700">

@@ -572,10 +572,6 @@ video {
   z-index: 50;
 }
 
-.m-auto {
-  margin: auto;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -613,16 +609,16 @@ video {
   height: 2rem;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .h-full {
   height: 100%;
 }
 
 .h-screen {
   height: 100vh;
-}
-
-.min-h-full {
-  min-height: 100%;
 }
 
 .w-3 {
@@ -639,6 +635,10 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.min-w-96 {
+  min-width: 24rem;
 }
 
 .min-w-full {
@@ -942,16 +942,8 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:min-h-96 {
-    min-height: 24rem;
-  }
-
   .sm\:w-full {
     width: 100%;
-  }
-
-  .sm\:min-w-80 {
-    min-width: 20rem;
   }
 
   .sm\:text-sm {
