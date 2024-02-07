@@ -16,8 +16,6 @@ export function Home() {
   const [direction, setDirection] = useState<string>(DIRECTION.DESC)
   const [limit, setLimit] = useState<number>(20)
   const [sort, setSort] = useState<string>(PRODUCTO_COLUMN.FECHA)
-  const [next, setNext] = useState<number>()
-  const [preview, setPreview] = useState<number>()
 
   const handleClose = () => {
     setOpen(false);
@@ -26,10 +24,6 @@ export function Home() {
   const handleOpen = () => {
     setOpen(true);
   };
-
-  const barcodeScan = () => {
-    // TODO
-  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
@@ -46,9 +40,7 @@ export function Home() {
         setProducto(response.content)
         setPage(response.page)
         setLimit(response.limit)
-        setNext(response.next)
         setSort(response.sort)
-        setPreview(response.preview)
         setDirection(response.direction)
         console.log(response)
       })
