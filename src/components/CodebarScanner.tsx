@@ -7,21 +7,21 @@ const qrcodeRegionId = "render"
 
 const config = {
     fps: 10,
-  qrbox: {width: 100, height: 100},
-  rememberLastUsedCamera: true,
+    qrbox: { width: 400, height: 250 },
+    rememberLastUsedCamera: true,
 }
 
 interface CodebarScannerProps {
     onScanner: (code: string) => void
 }
 
-export function CodebarScanner ({onScanner}: CodebarScannerProps) {
+export function CodebarScanner({ onScanner }: CodebarScannerProps) {
 
     const qrCodeSuccessCallback = (decodedText: string, result: Html5QrcodeResult) => {
         console.log(decodedText, result)
         onScanner(decodedText)
     }
-    
+
     const qrCodeErrorCallback = (errorMessage: string) => {
         console.log(errorMessage)
     }

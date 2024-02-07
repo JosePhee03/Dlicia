@@ -58,7 +58,7 @@ export function Home() {
       <Modal isOpen={open} onClose={handleClose} onSubmit={handleSubmit} titleModal="Buscar Producto">
         <Input label="Código de barras" onChange={handleChange} type="number" name="barcode" id="input-barcode" value={value} placeholder="77891235438734"></Input>
         <label>Escanear Código de barras</label>
-        <CodebarScanner onScanner={getCodeScanner} />
+        <CodebarScanner onScanner={(code) => getCodeScanner(code)} />
       </Modal>
 
       <div class="rounded-lg border border-gray-200 dark:border-gray-700">
