@@ -13,7 +13,6 @@ export function Codebar(props: CodebarProps) {
     const [categorias, setCategorias] = useState<Categoria[]>([])
     const [marcas, setMarcas] = useState<Marca[]>([])
     const [producto, setProducto] = useState<Producto>()
-    const [isProducto, setIsProducto] = useState<boolean>()
 
     useEffect(() => {
         getCategorias()
@@ -35,12 +34,7 @@ export function Codebar(props: CodebarProps) {
 
         getProducto(parseInt(props.codebar))
             .then(response => {
-                if (response == null) {
-                    setIsProducto(false)
-                } else {
-                    setIsProducto(true)
-                    setProducto(response)
-                }
+                setProducto(response)
                 console.log(response)
             })
             .catch(e => {
@@ -57,9 +51,12 @@ export function Codebar(props: CodebarProps) {
             codebar: parseInt(formData.get("input-codebar") as string),
             producto: formData.get("input-producto") as string,
             categoriaId: parseInt(formData.get("select-categoria") as string),
-            marcaId: parseInt(formData.get("select-marca") as string)
+            marcaId: parseInt(formData.get("select-marca") as string),
+            cantidad: parseInt(formData.get("input-cantidad") as string),
+            precio: parseInt(formData.get("input-precio") as string)
         }
 
+        console.log(productoFromData)
         postProducto(productoFromData).then((e) => console.log("EXITO", e)).catch((e) => console.log("NOSE PUTIOD", e))
     }
 

@@ -30,19 +30,47 @@ export const getMarcas = async (): Promise<Marca[]> => {
 }
 
 export const postProducto = async ({ codebar, producto, marcaId, categoriaId, cantidad, precio }: CreateProducto) => {
-  const sql = `INSERT INTO Producto (id, producto, marca_id, categoria_id) VALUES (?, ?, ?, ?);`
-  const sql2 = `INSERT INTO Control_Stock (producto_id, cantidad, fecha) VALUES (?, ?, ?);`
-  const sql3 = `INSERT INTO Control_Precio (producto_id, precio, fecha) VALUES (?, ?, ?);`
+
+  let isSuccessful = false
+
+  const fecha = new Date().toISOString()
+
+  const transaction = await client.transaction("write");
 
 
-  const inserts = {
-    sql,
-    args: [codebar, producto, marcaId, categoriaId]
+  try {
+    if (await getProducto(codebar) == undefined) {
+      await transaction.execute({
+        sql: "INSERT INTO Producto (id, producto, marca_id, categoria_id)  VALUES (?, ?, ?, ?)",
+        args: [codebar, producto, marcaId, categoriaId],
+      });
+    } else {
+      await transaction.execute({
+        sql: "UPDATE Producto SET producto = ?, marca_id = ?, categoria_id = ? WHERE id = ?",
+        args: [producto, marcaId, categoriaId, codebar],
+      });
+
+    }
+    await transaction.execute({
+      sql: "INSERT INTO Control_Stock (producto_id, cantidad, fecha) VALUES (?, ?, ?)",
+      args: [codebar, cantidad, fecha],
+    });
+    await transaction.execute({
+      sql: "INSERT INTO Control_Precio (producto_id, precio, fecha) VALUES (?, ?, ?)",
+      args: [codebar, precio, fecha],
+    });
+
+    await transaction.commit();
+    isSuccessful = true
+  } catch (e) {
+    console.log(e)
+    await transaction.rollback()
+    isSuccessful = false
+  } finally {
+    await transaction.close();
+    return isSuccessful
   }
 
-  const result = await client.execute(inserts)
-
-  return result
 }
 
 export const postControlStock = async ({ productoId, cantidad }: CreateControlStrock) => {
@@ -78,7 +106,7 @@ export const postControlPrecio = async ({ productoId, precio }: CreateControlPre
 export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUMN.FECHA, direction = DIRECTION.DESC }: ProductoSummaryParams): Promise<Page<Producto>> => {
   const offset = page * limit
 
-  const sql = "SELECT Producto.id AS codebar, Producto.producto AS producto, Marca.marca AS marca, Categoria.categoria AS categoria, Control_Stock.cantidad AS cantidad, Control_Precio.precio AS precio, MAX(Control_precio.fecha) AS fecha FROM Producto LEFT JOIN Marca ON Producto.marca_id = Marca.id LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id LEFT JOIN Control_Precio ON Producto.id = Control_precio.producto_id LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id GROUP BY Producto.id ORDER BY fecha DESC LIMIT $limit OFFSET $offset"
+  const sql = "SELECT Producto.id AS codebar, Producto.producto AS producto, Marca.marca AS marca, Categoria.categoria AS categoria, Control_Stock.cantidad AS cantidad, Control_Precio.precio AS precio, MAX(Control_precio.fecha) AS fecha FROM Producto LEFT JOIN Marca ON Producto.marca_id = Marca.id LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id GROUP BY Producto.id ORDER BY fecha DESC LIMIT $limit OFFSET $offset"
 
   const selects = {
     sql,
