@@ -14,11 +14,12 @@ export function Codebar(props: CodebarProps) {
     const [marcas, setMarcas] = useState<Marca[]>([])
     const [producto, setProducto] = useState<Producto>()
     const [showToast, setShowToast] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         getCategorias()
             .then(response => {
-                console.log(response)
                 setCategorias(response)
             })
             .catch(e => {
@@ -26,7 +27,6 @@ export function Codebar(props: CodebarProps) {
             })
         getMarcas()
             .then(response => {
-                console.log(response)
                 setMarcas(response)
             })
             .catch(e => {
@@ -36,21 +36,22 @@ export function Codebar(props: CodebarProps) {
         getProducto(parseInt(props.codebar))
             .then(response => {
                 setProducto(response)
-                console.log(response)
             })
             .catch(e => {
                 console.log("un ERROR", e)
             })
     }, [])
 
-    const handleToast = () => {
-        Toast({ message: "PRUEBA" })
-        console.log("TOAST")
+    const clearToast = () => {
+        setTimeout(() => {
+            setShowToast(false)
+        }, 5000)
     }
 
     const onSubmit = (event: SubmitEvent) => {
         event.preventDefault()
         setShowToast(true)
+        setLoading(true)
         const formData = new FormData(event.currentTarget as HTMLFormElement);
 
         const productoFromData: CreateProducto = {
@@ -62,52 +63,70 @@ export function Codebar(props: CodebarProps) {
             precio: parseInt(formData.get("input-precio") as string)
         }
 
-        console.log(productoFromData)
-        postProducto(productoFromData).then((e) => console.log("EXITO", e)).catch((e) => console.log("NOSE PUTIOD", e))
+        postProducto(productoFromData)
+            .then(() => {
+                setError(false)
+            }).catch(() => {
+                setError(true)
+            }).finally(() => {
+                setLoading(false)
+                clearToast()
+            })
     }
 
     return (
-        <main class="w-full flex flex-col justify-center items-center gap-8">
-            <h1 class="text-2xl font-bold">Buscar Producto</h1>
+        <>
+            <header class="flex gap-4 items-center w-full">
+                <a href="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+                </a><h1 class="text-2xl font-bold">Buscar Producto</h1>
 
-            <form onSubmit={onSubmit} className=" sm:w-full max-w-2xl flex flex-col gap-4">
+            </header>
+            <main class="w-full flex flex-col gap-8">
 
-                <div role="alert" class="rounded border-s-4 border-blue-500 bg-blue-50 p-4">
-                    <strong class="block font-medium text-blue-800"> El producto "{props.codebar}" {producto != undefined ? "YA EXISTE" : "NO EXISTE"} </strong>
-                    <p class="mt-2 text-sm text-blue-700">
-                        <p>Rellene los campos y guarde el producto.</p>
-                    </p>
-                </div>
+                <form onSubmit={onSubmit} className="flex flex-col gap-4">
 
-                <Input id="input-codebar" readOnly label="Código de barras" name="input-codebar" type="number" value={props.codebar}></Input>
-                <Input id="input-producto" label="Producto" name="input-producto" type="text" value={producto?.producto ?? ""} />
+                    <div role="alert" class="rounded border-s-4 border-blue-500 bg-blue-50 p-4">
+                        <strong class="block font-medium text-blue-800"> El producto "{props.codebar}" {producto != undefined ? "YA EXISTE" : "NO EXISTE"} </strong>
+                        <p class="mt-2 text-sm text-blue-700">
+                            <p>Rellene los campos y guarde el producto.</p>
+                        </p>
+                    </div>
 
-                <Input list="categorias" value={producto?.categoria ?? ""} type="text" id="input-categoria" label="Categoria" name="input-categoria">
-                    <datalist id="categorias">
-                        {categorias.map(({ id, categoria }) => {
-                            return <option key={id} value={categoria} />
-                        })}
-                    </datalist>
-                </Input>
+                    <Input id="input-codebar" readOnly label="Código de barras" name="input-codebar" type="number" value={props.codebar}></Input>
+                    <Input id="input-producto" label="Producto" name="input-producto" type="text" value={producto?.producto ?? ""} />
 
-                <Input list="marcas" value={producto?.marca ?? ""} type="text" id="input-marca" label="Marca" name="input-marca">
-                    <datalist id="marcas">
-                        {marcas.map(({ id, marca }) => {
-                            return <option key={id} value={marca} />
-                        })}
-                    </datalist>
-                </Input>
+                    <Input list="categorias" value={producto?.categoria ?? ""} type="text" id="input-categoria" label="Categoria" name="input-categoria">
+                        <datalist id="categorias">
+                            {categorias.map(({ id, categoria }) => {
+                                return <option key={id} value={categoria} />
+                            })}
+                        </datalist>
+                    </Input>
 
-                <Input id="input-cantidad" label="Cantidad" name="input-cantidad" type="number" value={producto?.cantidad ?? ""} />
+                    <Input list="marcas" value={producto?.marca ?? ""} type="text" id="input-marca" label="Marca" name="input-marca">
+                        <datalist id="marcas">
+                            {marcas.map(({ id, marca }) => {
+                                return <option key={id} value={marca} />
+                            })}
+                        </datalist>
+                    </Input>
 
-                <Input id="input-precio" label="Precio Unitario proveedor" name="input-precio" type="number" value={producto?.precio ?? ""} />
+                    <Input id="input-cantidad" label="Cantidad" name="input-cantidad" type="number" value={producto?.cantidad ?? ""} />
 
-                <Button type="submit" title="Crear nuevo producto">Guardar</Button>
-            </form>
+                    <Input id="input-precio" label="Precio Unitario proveedor" name="input-precio" type="number" value={producto?.precio ?? ""} />
 
-            {showToast && <Toast message="PRUEBA" />}
+                    <Button disabled={loading} type="submit" title="Crear nuevo producto">Guardar</Button>
+                </form>
 
-        </main>
+                {showToast && loading ?
+                    <Toast message="Guardando el producto" type="loading" />
+                    : showToast && !loading && error ?
+                        <Toast message="Ucurrio un error al guardar el producto" type="error" />
+                        : showToast && !loading && !error && <Toast message="Producto Guardado con exito" type="success" />}
+
+            </main>
+        </>
 
     )
 }

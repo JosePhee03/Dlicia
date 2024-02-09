@@ -31,7 +31,7 @@ export const getMarcas = async (): Promise<Marca[]> => {
 
 const getMarcaByName = async (name: string): Promise<Marca> => {
 
-  const sql = "SELECT * FROM Marca WHERE marca = ?"
+  const sql = "SELECT * FROM Marca WHERE marca LIKE ?"
 
   const selects = {
     sql,
@@ -51,7 +51,7 @@ const getMarcaByName = async (name: string): Promise<Marca> => {
 
 const getCategoriaByName = async (name: string): Promise<Categoria> => {
 
-  const sql = "SELECT * FROM Categoria WHERE categoria = ?"
+  const sql = "SELECT * FROM Categoria WHERE categoria LIKE ?"
 
   const selects = {
     sql,
@@ -72,7 +72,7 @@ const getCategoriaByName = async (name: string): Promise<Categoria> => {
 
 export const postProducto = async ({ codebar, producto, marca, categoria, cantidad, precio }: CreateProducto) => {
 
-  let isSuccessful = false
+  console.log({ categoria, marca })
 
   const fecha = new Date().toISOString()
 
@@ -96,9 +96,19 @@ export const postProducto = async ({ codebar, producto, marca, categoria, cantid
       });
     }
 
-    categoriaId = (await getCategoriaByName(categoria)).id
-    marcaId = (await getMarcaByName(marca)).id
+    const categoriaDB = await transaction.execute({
+      sql: "SELECT id FROM Categoria WHERE categoria = ?",
+      args: [categoria]
+    })
+    const marcaDB = await transaction.execute({
+      sql: "SELECT id FROM Marca WHERE marca = ?",
+      args: [marca]
+    })
 
+    categoriaId = categoriaDB.rows[0].id as number
+    marcaId = marcaDB.rows[0].id as number
+
+    console.log({ categoriaId, marcaId })
 
     if (await getProducto(codebar) == undefined) {
       await transaction.execute({
@@ -123,14 +133,12 @@ export const postProducto = async ({ codebar, producto, marca, categoria, cantid
     });
 
     await transaction.commit();
-    isSuccessful = true
   } catch (e) {
     console.log(e)
     await transaction.rollback()
-    isSuccessful = false
+    throw new Error()
   } finally {
     await transaction.close();
-    return isSuccessful
   }
 
 }
