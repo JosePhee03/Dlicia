@@ -22,14 +22,55 @@ export const getMarcas = async (): Promise<Marca[]> => {
 
   const result = await client.execute(sql);
 
-  const categorias: Marca[] = result.rows.map(row => ({
+  const marca: Marca[] = result.rows.map(row => ({
     id: row.id as number,
     marca: row.marca as string,
   }));
-  return categorias
+  return marca
 }
 
-export const postProducto = async ({ codebar, producto, marcaId, categoriaId, cantidad, precio }: CreateProducto) => {
+const getMarcaByName = async (name: string): Promise<Marca> => {
+
+  const sql = "SELECT * FROM Marca WHERE marca = ?"
+
+  const selects = {
+    sql,
+    args: [name]
+  }
+
+  const result = await client.execute(selects);
+
+  const [marcas]: Marca[] = result.rows.map(row => ({
+    id: row.id as number,
+    marca: row.marca as string,
+  }));
+
+  console.log({ MARCA: marcas })
+  return marcas
+}
+
+const getCategoriaByName = async (name: string): Promise<Categoria> => {
+
+  const sql = "SELECT * FROM Categoria WHERE categoria = ?"
+
+  const selects = {
+    sql,
+    args: [name]
+  }
+
+  const result = await client.execute(selects);
+
+  const [categoria]: Categoria[] = result.rows.map(row => ({
+    id: row.id as number,
+    categoria: row.categoria as string,
+  }));
+
+  console.log({ CATEGORIA: categoria })
+  return categoria
+
+}
+
+export const postProducto = async ({ codebar, producto, marca, categoria, cantidad, precio }: CreateProducto) => {
 
   let isSuccessful = false
 
@@ -37,14 +78,35 @@ export const postProducto = async ({ codebar, producto, marcaId, categoriaId, ca
 
   const transaction = await client.transaction("write");
 
+  let marcaId = 0
+  let categoriaId = 0
 
   try {
+    if (await getMarcaByName(marca) == undefined) {
+      await transaction.execute({
+        sql: "INSERT INTO Marca (marca) VALUES (?)",
+        args: [marca]
+      });
+    }
+
+    if (await getCategoriaByName(categoria) == undefined) {
+      await transaction.execute({
+        sql: "INSERT INTO Categoria (categoria) VALUES (?)",
+        args: [categoria]
+      });
+    }
+
+    categoriaId = (await getCategoriaByName(categoria)).id
+    marcaId = (await getMarcaByName(marca)).id
+
+
     if (await getProducto(codebar) == undefined) {
       await transaction.execute({
         sql: "INSERT INTO Producto (id, producto, marca_id, categoria_id)  VALUES (?, ?, ?, ?)",
         args: [codebar, producto, marcaId, categoriaId],
       });
     } else {
+
       await transaction.execute({
         sql: "UPDATE Producto SET producto = ?, marca_id = ?, categoria_id = ? WHERE id = ?",
         args: [producto, marcaId, categoriaId, codebar],
@@ -144,7 +206,6 @@ export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUM
 export const getProducto = async (codebar: number): Promise<Producto> => {
 
   const sql = "SELECT Producto.id AS codebar, Producto.producto AS producto, Marca.marca AS marca, Categoria.categoria AS categoria, Control_Stock.cantidad AS cantidad, Control_Precio.precio AS precio, MAX(Control_Precio.fecha) AS fecha FROM Producto LEFT JOIN Marca ON Producto.marca_id = Marca.id LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id WHERE Producto.id = ? GROUP BY codebar"
-
 
   const selects = {
     sql,

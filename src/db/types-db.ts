@@ -11,8 +11,8 @@ export interface Marca {
 export interface CreateProducto {
     codebar: number
     producto: string
-    categoriaId: number
-    marcaId: number
+    categoria: string
+    marca: string
     cantidad: number
     precio: number
 }
