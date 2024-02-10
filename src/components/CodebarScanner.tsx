@@ -39,6 +39,6 @@ export function CodebarScanner({ onScanner }: CodebarScannerProps) {
     }, []);
 
     return (
-        <div id={qrcodeRegionId} />
+        <div class="w-full sm:w-80" id={qrcodeRegionId} />
     );
 }

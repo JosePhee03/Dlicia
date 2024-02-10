@@ -1,3 +1,4 @@
+import { createPortal } from "preact/compat";
 import { Button } from "./Button"
 import { JSX } from "preact";
 
@@ -15,11 +16,12 @@ export function Modal(props: ModalProps) {
 	if (!isOpen) return null
 
 	return (
-		<div className="relative z-50" >
-			<div className="fixed inset-0 bg-black/30 " aria-hidden="true">
-				<div className="fixed inset-0 overflow-auto">
-					<div className="flex items-center justify-center  w-full h-full">
-						<form onSubmit={(e) => onSubmit(e)} className="flex flex-col w-full h-full sm:h-auto sm:max-w-xl gap-8 rounded p-8 bg-white shadow-md">
+		createPortal(
+		<div className="relative z-50 modal-content" >
+			<div className="fixed inset-0 bg-black/30" aria-hidden="true">
+				<div className="fixed inset-0 w-screen overflow-y-auto">
+					<div className="flex h-full sm:h-auto items-center justify-center sm:p-4">
+						<form onSubmit={(e) => onSubmit(e)} className="flex flex-col h-full sm:h-auto sm:w-full md:min-w-96 gap-8 rounded p-8 bg-white shadow-md">
 							<head className="w-full font-bold text-xl flex justify-center items-center">
 								{titleModal}
 							</head>
@@ -36,6 +38,6 @@ export function Modal(props: ModalProps) {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>, document.getElementById('portal') as HTMLDivElement)
 	)
 }

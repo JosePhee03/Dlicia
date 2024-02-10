@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { route } from 'preact-router'
-import { ChangeEvent } from "preact/compat";
+import { ChangeEvent, createPortal } from "preact/compat";
 import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
@@ -55,11 +55,13 @@ export function Home() {
     <main className="max-w-[640px] py-8 h-screen mx-auto flex flex-col gap-4">
       <h1 className="font-bold text-4xl">D'licia</h1>
       <Button className="max-w-64" type="button" onClick={handleOpen} title="Buscar producto">Buscar Producto</Button>
+           
       <Modal isOpen={open} onClose={handleClose} onSubmit={handleSubmit} titleModal="Buscar Producto">
         <Input label="Código de barras" onChange={handleChange} type="number" name="barcode" id="input-barcode" value={value} placeholder="77891235438734"></Input>
         <label>Escanear Código de barras</label>
         <CodebarScanner onScanner={(code) => getCodeScanner(code)} />
       </Modal>
+      
 
       <div class="rounded-lg border border-gray-200 dark:border-gray-700">
         <div class="overflow-x-auto rounded-t-lg">
