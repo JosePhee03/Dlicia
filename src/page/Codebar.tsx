@@ -94,9 +94,9 @@ export function Codebar(props: CodebarProps) {
                     </div>
 
                     <Input id="input-codebar" readOnly label="Código de barras" name="input-codebar" type="number" value={props.codebar}></Input>
-                    <Input id="input-producto" label="Producto" name="input-producto" type="text" value={producto?.producto ?? ""} />
+                    <Input placeholder="Ej: HARINA" id="input-producto" label="Producto" name="input-producto" type="text" value={producto?.producto ?? ""} />
 
-                    <Input list="categorias" value={producto?.categoria ?? ""} type="text" id="input-categoria" label="Categoria" name="input-categoria">
+                    <Input placeholder="COCINA" list="categorias" value={producto?.categoria ?? ""} type="text" id="input-categoria" label="Categoria" name="input-categoria">
                         <datalist id="categorias">
                             {categorias.map(({ id, categoria }) => {
                                 return <option key={id} value={categoria} />
@@ -104,7 +104,7 @@ export function Codebar(props: CodebarProps) {
                         </datalist>
                     </Input>
 
-                    <Input list="marcas" value={producto?.marca ?? ""} type="text" id="input-marca" label="Marca" name="input-marca">
+                    <Input placeholder="Ej: SERENISIMA" list="marcas" value={producto?.marca ?? ""} type="text" id="input-marca" label="Marca" name="input-marca">
                         <datalist id="marcas">
                             {marcas.map(({ id, marca }) => {
                                 return <option key={id} value={marca} />
@@ -112,9 +112,9 @@ export function Codebar(props: CodebarProps) {
                         </datalist>
                     </Input>
 
-                    <Input id="input-cantidad" label="Cantidad" name="input-cantidad" type="number" value={producto?.cantidad ?? ""} />
+                    <Input placeholder="Ej: 33" id="input-cantidad" label="Cantidad" name="input-cantidad" type="number" value={producto?.cantidad ?? ""} />
 
-                    <Input id="input-precio" label="Precio Unitario proveedor" name="input-precio" type="number" value={producto?.precio ?? ""} />
+                    <Input placeholder="Ej: $100" id="input-precio" label="Precio" name="input-precio" type="number" value={producto?.precio ?? ""} />
 
                     <Button disabled={loading} type="submit" title="Crear nuevo producto">Guardar</Button>
                 </form>
