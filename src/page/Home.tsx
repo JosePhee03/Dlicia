@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { route } from 'preact-router'
-import { ChangeEvent, createPortal } from "preact/compat";
+import { ChangeEvent } from "preact/compat";
 import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";

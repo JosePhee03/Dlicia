@@ -1149,12 +1149,20 @@ video {
     height: auto;
   }
 
+  .sm\:h-full {
+    height: 100%;
+  }
+
   .sm\:w-80 {
     width: 20rem;
   }
 
   .sm\:w-full {
     width: 100%;
+  }
+
+  .sm\:max-w-96 {
+    max-width: 24rem;
   }
 
   .sm\:p-4 {
@@ -1168,6 +1176,10 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:h-full {
+    height: 100%;
+  }
+
   .md\:min-w-96 {
     min-width: 24rem;
   }
