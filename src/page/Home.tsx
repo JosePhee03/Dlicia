@@ -49,7 +49,7 @@ export function Home() {
 
   const getCodeScanner = (code: string) => {
     setValue(code)
-    route(`/${value}`)
+    route(`/${code}`)
   }
 
   return (
