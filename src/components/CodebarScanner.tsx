@@ -7,7 +7,7 @@ const qrcodeRegionId = "render"
 
 const config = {
     fps: 10,
-    qrbox: { width: 400, height: 250 },
+    qrbox: { width: 300, height: 150 },
     rememberLastUsedCamera: true,
 }
 
@@ -39,6 +39,6 @@ export function CodebarScanner({ onScanner }: CodebarScannerProps) {
     }, []);
 
     return (
-        <div class="w-full sm:w-80" id={qrcodeRegionId} />
+        <div class="  sm:w-80" id={qrcodeRegionId} />
     );
 }
