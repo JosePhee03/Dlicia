@@ -17,17 +17,21 @@ interface CodebarScannerProps {
 
 export function CodebarScanner({ onScanner }: CodebarScannerProps) {
 
-    const qrCodeSuccessCallback = (decodedText: string, result: Html5QrcodeResult) => {
-        console.log(decodedText, result)
-        onScanner(decodedText)
-    }
-
-    const qrCodeErrorCallback = (errorMessage: string) => {
-        console.log(errorMessage)
-    }
+    
 
     useEffect(() => {
         const html5QrcodeScanner = new Html5QrcodeScanner(qrcodeRegionId, config, false);
+
+        const qrCodeSuccessCallback = (decodedText: string, result: Html5QrcodeResult) => {
+            console.log(decodedText, result)
+            onScanner(decodedText)
+            html5QrcodeScanner.pause(true)
+            
+        }
+    
+        const qrCodeErrorCallback = (errorMessage: string) => {
+            console.log(errorMessage)
+        }
 
         html5QrcodeScanner.render(qrCodeSuccessCallback, qrCodeErrorCallback);
 
@@ -39,6 +43,6 @@ export function CodebarScanner({ onScanner }: CodebarScannerProps) {
     }, []);
 
     return (
-        <div class="  sm:w-80" id={qrcodeRegionId} />
+        <div class=" w-60 sm:w-80" id={qrcodeRegionId} />
     );
 }
