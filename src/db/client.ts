@@ -176,7 +176,21 @@ export const postControlPrecio = async ({ productoId, precio }: CreateControlPre
 export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUMN.FECHA, direction = DIRECTION.DESC }: ProductoSummaryParams): Promise<Page<Producto>> => {
   const offset = page * limit
 
-  const sql = "SELECT Producto.id AS codebar, Producto.producto AS producto, Marca.marca AS marca, Categoria.categoria AS categoria, Control_Stock.cantidad AS cantidad, Control_Precio.precio AS precio, MAX(Control_precio.fecha) AS fecha FROM Producto LEFT JOIN Marca ON Producto.marca_id = Marca.id LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id GROUP BY Producto.id ORDER BY fecha DESC LIMIT $limit OFFSET $offset"
+  const sql: string = `
+  SELECT Producto.id AS codebar,
+  Producto.producto AS producto,
+  Marca.marca AS marca,
+  Categoria.categoria AS categoria,
+  Control_Stock.cantidad AS cantidad,
+  Control_Precio.precio AS precio,
+  MAX(Control_Stock.fecha) AS fecha
+   FROM Producto 
+   LEFT JOIN Marca ON Producto.marca_id = Marca.id 
+   LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id 
+   LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id AND Control_Precio.fecha = (SELECT MAX(fecha) FROM Control_Precio WHERE producto_id = Producto.id)
+   LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id AND Control_Stock.fecha = (SELECT MAX(fecha) FROM Control_Stock WHERE producto_id = Producto.id)
+   GROUP BY Producto.id ORDER BY Control_Stock.fecha DESC LIMIT $limit OFFSET $offset;
+`
 
   const selects = {
     sql,
@@ -213,7 +227,21 @@ export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUM
 
 export const getProducto = async (codebar: number): Promise<Producto> => {
 
-  const sql = "SELECT Producto.id AS codebar, Producto.producto AS producto, Marca.marca AS marca, Categoria.categoria AS categoria, Control_Stock.cantidad AS cantidad, Control_Precio.precio AS precio, MAX(Control_Precio.fecha) AS fecha FROM Producto LEFT JOIN Marca ON Producto.marca_id = Marca.id LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id WHERE Producto.id = ? GROUP BY codebar"
+  const sql = `
+    SELECT 
+      Producto.id AS codebar,
+      Producto.producto AS producto,
+      Marca.marca AS marca,
+      Categoria.categoria AS categoria,
+      Control_Stock.cantidad AS cantidad,
+      Control_Precio.precio AS precio,
+      MAX(Control_Stock.fecha) AS fecha 
+    FROM Producto
+    LEFT JOIN Marca ON Producto.marca_id = Marca.id 
+    LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id 
+    LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id AND Control_Precio.fecha = (SELECT MAX(fecha) FROM Control_Precio WHERE producto_id = Producto.id)
+    LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id AND Control_Stock.fecha = (SELECT MAX(fecha) FROM Control_Stock WHERE producto_id = Producto.id)
+    WHERE Producto.id = ? GROUP BY codebar`
 
   const selects = {
     sql,
