@@ -22,7 +22,7 @@ export function Input(props: InputProps) {
             <label for={id} class="block text-sm font-medium text-gray-700 dark:text-gray-200">{label}</label>
 
             <input list={list} onChange={onChange} required={!readOnly} readOnly={readOnly}
-                className={`w-full rounded py-2 px-4 bg-slate-100 border-gray-200 shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white ${className}`} id={id} name={name} placeholder={placeholder} type={type} value={value} />
+                className={`mt-2 w-full focus:outline-none focus:ring rounded py-2 px-4 bg-slate-100 border-gray-200 shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white ${className}`} id={id} name={name} placeholder={placeholder} type={type} value={value} />
 
             {children}
 

@@ -17,7 +17,7 @@ export function Codebar(props: CodebarProps) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
-    useEffect(() => {
+    const fetchAllPRoductos = () => {
         getCategorias()
             .then(response => {
                 setCategorias(response)
@@ -40,6 +40,10 @@ export function Codebar(props: CodebarProps) {
             .catch(e => {
                 console.log("un ERROR", e)
             })
+    }
+
+    useEffect(() => {
+        fetchAllPRoductos()
     }, [])
 
     const clearToast = () => {
@@ -71,32 +75,33 @@ export function Codebar(props: CodebarProps) {
             }).finally(() => {
                 setLoading(false)
                 clearToast()
+                fetchAllPRoductos()
             })
     }
 
     return (
         <>
             <header class="flex gap-4 items-center w-full">
-                <a href="/">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
-                </a><h1 class="text-2xl font-bold">Buscar Producto</h1>
+                <a className="" href="/">
+                    <svg className="dark:stroke-white" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+                </a><h1 class="text-2xl font-bold dark:text-white">Buscar Producto</h1>
 
             </header>
             <main class="w-full flex flex-col gap-8">
 
                 <form onSubmit={onSubmit} className="flex flex-col gap-4">
 
-                    <div role="alert" class="rounded border-s-4 border-blue-500 bg-blue-50 p-4">
-                        <strong class="block font-medium text-blue-800"> El producto "{props.codebar}" {producto != undefined ? "YA EXISTE" : "NO EXISTE"} </strong>
-                        <p class="mt-2 text-sm text-blue-700">
+                    <div role="alert" class="rounded border-s-4 border-blue-500 bg-blue-50 dark:border-blue-600/40 dark:bg-blue-900/40  p-4">
+                        <strong class="block font-medium text-blue-800 dark:text-blue-100"> El producto "{props.codebar}" {producto != undefined ? "YA EXISTE" : "NO EXISTE"} </strong>
+                        <p class="mt-2 text-sm text-blue-700 dark:text-blue-200">
                             <p>Rellene los campos y guarde el producto.</p>
                         </p>
                     </div>
 
                     <Input id="input-codebar" readOnly label="Código de barras" name="input-codebar" type="number" value={props.codebar}></Input>
-                    <Input placeholder="Ej: HARINA" id="input-producto" label="Producto" name="input-producto" type="text" value={producto?.producto ?? ""} />
+                    <Input readOnly={loading} placeholder="Ej: HARINA" id="input-producto" label="Producto" name="input-producto" type="text" value={producto?.producto ?? ""} />
 
-                    <Input placeholder="COCINA" list="categorias" value={producto?.categoria ?? ""} type="text" id="input-categoria" label="Categoria" name="input-categoria">
+                    <Input readOnly={loading} placeholder="COCINA" list="categorias" value={producto?.categoria ?? ""} type="text" id="input-categoria" label="Categoria" name="input-categoria">
                         <datalist id="categorias">
                             {categorias.map(({ id, categoria }) => {
                                 return <option key={id} value={categoria} />
@@ -104,7 +109,7 @@ export function Codebar(props: CodebarProps) {
                         </datalist>
                     </Input>
 
-                    <Input placeholder="Ej: SERENISIMA" list="marcas" value={producto?.marca ?? ""} type="text" id="input-marca" label="Marca" name="input-marca">
+                    <Input readOnly={loading} placeholder="Ej: SERENISIMA" list="marcas" value={producto?.marca ?? ""} type="text" id="input-marca" label="Marca" name="input-marca">
                         <datalist id="marcas">
                             {marcas.map(({ id, marca }) => {
                                 return <option key={id} value={marca} />
@@ -112,9 +117,9 @@ export function Codebar(props: CodebarProps) {
                         </datalist>
                     </Input>
 
-                    <Input placeholder="Ej: 33" id="input-cantidad" label="Cantidad" name="input-cantidad" type="number" value={producto?.cantidad ?? ""} />
+                    <Input readOnly={loading} placeholder="Ej: 33" id="input-cantidad" label="Cantidad" name="input-cantidad" type="number" value={producto?.cantidad ?? ""} />
 
-                    <Input placeholder="Ej: $100" id="input-precio" label="Precio" name="input-precio" type="number" value={producto?.precio ?? ""} />
+                    <Input readOnly={loading} placeholder="Ej: $100" id="input-precio" label="Precio" name="input-precio" type="number" value={producto?.precio ?? ""} />
 
                     <Button disabled={loading} type="submit" title="Crear nuevo producto">Guardar</Button>
                 </form>

@@ -1,3 +1,5 @@
+import { createPortal } from "preact/compat"
+
 interface ToastProps {
   type: 'success' | 'error' | 'loading'
   message: string
@@ -46,20 +48,20 @@ export default function Toast({ message, type }: ToastProps) {
   switch (type) {
     case "error":
       svg = svgError
-      textColor = "text-red-600"
-      toastColor = "border-red-200 bg-red-50"
+      textColor = "text-red-600 dark:text-red-200"
+      toastColor = "border-red-200 bg-red-50 dark:border-red-600 dark:bg-red-900"
       title = "Ocurrio un error"
       break
     case "success":
       svg = svgSuccess
-      textColor = "text-green-600"
-      toastColor = "border-green-200 bg-green-50"
+      textColor = "text-green-600 dark:text-green-200"
+      toastColor = "border-green-200 bg-green-50 dark:border-green-600 dark:bg-green-900"
       title = "Exito"
       break
     case "loading":
       svg = svgLoading
-      textColor = "text-sky-600"
-      toastColor = "border-sky-200 bg-sky-50"
+      textColor = "text-sky-600 dark:text-sky-200"
+      toastColor = "border-sky-200 bg-sky-50 dark:border-sky-600 dark:bg-sky-900"
       title = "Cargando"
       break
   }
@@ -67,20 +69,18 @@ export default function Toast({ message, type }: ToastProps) {
 
 
 
-  const toastElement = <div role="alert" class={"rounded border-2 p-4 fixed top-2 shadow-md " + toastColor}>
+  return createPortal(<div class="relative z-10 "><div role="alert" class={" rounded border-2 p-4 fixed bottom-2 right-2 shadow-md " + toastColor}>
     <div class="flex items-start gap-4">
       <span class={textColor}>
         {svg}
       </span>
 
-      <div class="flex-1">
-        <strong class="block font-medium text-gray-900">{title}</strong>
+      <div class="flex-1 ">
+        <strong class="block font-medium text-gray-900 dark:text-gray-100">{title}</strong>
 
-        <p class="mt-1 text-sm text-gray-700">{message}</p>
+        <p class="mt-1 text-sm text-gray-700 dark:text-gray-200">{message}</p>
       </div>
     </div>
-  </div>
-
-  return toastElement
+  </div></div>, document.getElementById("portal")!)
 
 };
