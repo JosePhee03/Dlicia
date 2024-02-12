@@ -17,16 +17,6 @@ export interface CreateProducto {
     precio: number
 }
 
-export interface CreateControlStrock {
-    productoId: number
-    cantidad: number
-}
-
-export interface CreateControlPrecio {
-    productoId: number
-    precio: number
-}
-
 export enum DIRECTION {
     ASC = "ASC",
     DESC = "DESC"
@@ -40,13 +30,6 @@ export enum PRODUCTO_COLUMN {
     CANTIDAD = "cantidad",
     PRECIO = "precio",
     FECHA = "fecha"
-}
-
-export interface ProductoSummaryParams {
-    limit: number,
-    page: number,
-    direction: string
-    sort: string
 }
 
 export interface Producto {
@@ -69,4 +52,18 @@ export interface Page<T> {
     preview: number
     direction: string
     sort: string
+}
+export interface GetProductoParams {
+    page: number,
+    limit: number,
+    sort: PRODUCTO_COLUMN,
+    direction: DIRECTION
+}
+
+export interface ControlStock {
+    id: number
+    codebar: number
+    precio: number
+    cantidad: number
+    fecha: Date
 }

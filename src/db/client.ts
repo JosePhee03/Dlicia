@@ -1,5 +1,5 @@
 import { createClient } from "@libsql/client"
-import { PRODUCTO_COLUMN, Categoria, CreateControlPrecio, CreateControlStrock, CreateProducto, DIRECTION, Marca, Producto, ProductoSummaryParams, Page } from "./types-db";
+import { PRODUCTO_COLUMN, Categoria, CreateProducto, DIRECTION, Marca, Producto, Page, GetProductoParams, ControlStock } from "./types-db";
 
 const client = createClient({
   url: import.meta.env.VITE_DATABASE_URL ?? "",
@@ -123,14 +123,19 @@ export const postProducto = async ({ codebar, producto, marca, categoria, cantid
       });
 
     }
-    await transaction.execute({
-      sql: "INSERT INTO Control_Stock (producto_id, cantidad, fecha) VALUES (?, ?, ?)",
-      args: [codebar, cantidad, fecha],
-    });
-    await transaction.execute({
-      sql: "INSERT INTO Control_Precio (producto_id, precio, fecha) VALUES (?, ?, ?)",
-      args: [codebar, precio, fecha],
-    });
+
+    if (await getControlStock(codebar) == undefined) {
+      await transaction.execute({
+        sql: "INSERT INTO Control_Stock (producto_id, cantidad, precio, fecha)  VALUES (?, ?, ?, ?)",
+        args: [codebar, cantidad, precio, fecha],
+      });
+    } else {
+
+      await transaction.execute({
+        sql: "UPDATE Control_Stock SET cantidad = ?, precio = ?, fecha = ? WHERE producto_id = ?",
+        args: [cantidad, precio, fecha, codebar],
+      });
+    }
 
     await transaction.commit();
   } catch (e) {
@@ -143,53 +148,26 @@ export const postProducto = async ({ codebar, producto, marca, categoria, cantid
 
 }
 
-export const postControlStock = async ({ productoId, cantidad }: CreateControlStrock) => {
-  const sql = `INSERT INTO Control_Stock (producto_id, cantidad, fecha) VALUES (?, ?, ?)`
 
-  const fecha = new Date().toISOString()
 
-  const inserts = {
-    sql,
-    args: [productoId, cantidad, fecha]
-  }
 
-  const result = await client.execute(inserts)
-
-  return result
-}
-
-export const postControlPrecio = async ({ productoId, precio }: CreateControlPrecio) => {
-  const sql = `INSERT INTO Control_Precio (producto_id, precio, fecha) VALUES (?, ?, ?)`
-
-  const fecha = new Date().toISOString()
-
-  const inserts = {
-    sql,
-    args: [productoId, precio, fecha]
-  }
-
-  const result = await client.execute(inserts)
-
-  return result
-}
-
-export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUMN.FECHA, direction = DIRECTION.DESC }: ProductoSummaryParams): Promise<Page<Producto>> => {
+export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUMN.FECHA, direction = DIRECTION.DESC }: GetProductoParams): Promise<Page<Producto>> => {
   const offset = page * limit
 
   const sql: string = `
-  SELECT Producto.id AS codebar,
-  Producto.producto AS producto,
-  Marca.marca AS marca,
-  Categoria.categoria AS categoria,
-  Control_Stock.cantidad AS cantidad,
-  Control_Precio.precio AS precio,
-  MAX(Control_Stock.fecha) AS fecha
-   FROM Producto 
+  SELECT 
+    Producto.id AS codebar,
+    Producto.producto AS producto,
+    Marca.marca AS marca,
+    Categoria.categoria AS categoria,
+    Control_Stock.cantidad AS cantidad,
+    Control_Stock.precio AS precio,
+    Control_Stock.fecha AS fecha
+  FROM Producto 
    LEFT JOIN Marca ON Producto.marca_id = Marca.id 
    LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id 
-   LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id AND Control_Precio.fecha = (SELECT MAX(fecha) FROM Control_Precio WHERE producto_id = Producto.id)
-   LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id AND Control_Stock.fecha = (SELECT MAX(fecha) FROM Control_Stock WHERE producto_id = Producto.id)
-   GROUP BY Producto.id ORDER BY Control_Stock.fecha DESC LIMIT $limit OFFSET $offset;
+   LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id
+  GROUP BY Producto.id ORDER BY Control_Stock.fecha DESC LIMIT $limit OFFSET $offset;
 `
 
   const selects = {
@@ -225,6 +203,36 @@ export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUM
 
 }
 
+const getControlStock = async (codebar: number): Promise<ControlStock> => {
+
+  const sql = `
+    SELECT 
+      Control_Stock.id AS id,
+      Control_Stock.producto_id AS codebar,
+      Control_Stock.cantidad AS cantidad,
+      Control_Stock.precio AS precio,
+      Control_Stock.fecha AS fecha
+    FROM Control_Stock
+    WHERE Control_Stock.producto_id = ?`
+
+  const selects = {
+    sql,
+    args: [codebar]
+  }
+
+  const result = await client.execute(selects);
+
+  const [controlStock]: ControlStock[] = result.rows.map(row => ({
+    id: row.id as number,
+    codebar: row.codebar as number,
+    cantidad: row.cantidad as number,
+    precio: row.precio as number,
+    fecha: new Date(row.fecha as string)
+  }));
+
+  return controlStock
+}
+
 export const getProducto = async (codebar: number): Promise<Producto> => {
 
   const sql = `
@@ -234,13 +242,12 @@ export const getProducto = async (codebar: number): Promise<Producto> => {
       Marca.marca AS marca,
       Categoria.categoria AS categoria,
       Control_Stock.cantidad AS cantidad,
-      Control_Precio.precio AS precio,
-      MAX(Control_Stock.fecha) AS fecha 
+      Control_Stock.precio AS precio,
+      Control_Stock.fecha AS fecha
     FROM Producto
     LEFT JOIN Marca ON Producto.marca_id = Marca.id 
     LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id 
-    LEFT JOIN Control_Precio ON Producto.id = Control_Precio.producto_id AND Control_Precio.fecha = (SELECT MAX(fecha) FROM Control_Precio WHERE producto_id = Producto.id)
-    LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id AND Control_Stock.fecha = (SELECT MAX(fecha) FROM Control_Stock WHERE producto_id = Producto.id)
+    LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id
     WHERE Producto.id = ? GROUP BY codebar`
 
   const selects = {
