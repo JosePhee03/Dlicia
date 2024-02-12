@@ -56,8 +56,8 @@ export interface Page<T> {
 export interface GetProductoParams {
     page: number,
     limit: number,
-    sort: PRODUCTO_COLUMN,
-    direction: DIRECTION
+    sort?: PRODUCTO_COLUMN,
+    direction?: DIRECTION
 }
 
 export interface ControlStock {

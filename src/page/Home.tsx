@@ -5,7 +5,7 @@ import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
 import { getProductos } from "../db/client";
-import { DIRECTION, PRODUCTO_COLUMN, Producto } from "../db/types-db";
+import { Producto } from "../db/types-db";
 import { CodebarScanner } from "../components/CodebarScanner";
 
 export function Home() {
@@ -13,9 +13,7 @@ export function Home() {
   const [value, setValue] = useState("");
   const [producto, setProducto] = useState<Producto[]>([])
   const [page, setPage] = useState<number>(0)
-  const [direction, setDirection] = useState<string>(DIRECTION.DESC)
   const [limit, setLimit] = useState<number>(20)
-  const [sort, setSort] = useState<string>(PRODUCTO_COLUMN.FECHA)
 
   const handleClose = () => {
     setOpen(false);
@@ -35,13 +33,11 @@ export function Home() {
   }
 
   useEffect(() => {
-    getProductos({ direction, limit, page, sort })
+    getProductos({ limit, page })
       .then(response => {
         setProducto(response.content)
         setPage(response.page)
         setLimit(response.limit)
-        setSort(response.sort)
-        setDirection(response.direction)
         console.log(response)
       })
       .catch(response => console.log(response))
