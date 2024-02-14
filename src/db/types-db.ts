@@ -46,18 +46,19 @@ export interface Page<T> {
     content: T[]
     limit: number
     page: number
-    offset: number
     size: number
-    next: number
-    preview: number
-    direction: string
-    sort: string
+    total: number
 }
 export interface GetProductoParams {
     page: number,
     limit: number,
-    sort?: PRODUCTO_COLUMN,
     direction?: DIRECTION
+}
+
+export interface UpdateControlStock {
+    cantidad: number
+    precio: number
+    codebar: number
 }
 
 export interface ControlStock {

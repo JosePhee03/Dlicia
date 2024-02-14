@@ -1,5 +1,5 @@
 import { createClient } from "@libsql/client"
-import { PRODUCTO_COLUMN, Categoria, CreateProducto, DIRECTION, Marca, Producto, Page, GetProductoParams, ControlStock } from "./types-db";
+import { Categoria, CreateProducto, DIRECTION, Marca, Producto, Page, GetProductoParams, ControlStock, UpdateControlStock } from "./types-db";
 
 const client = createClient({
   url: import.meta.env.VITE_DATABASE_URL ?? "",
@@ -71,8 +71,6 @@ const getCategoriaByName = async (name: string): Promise<Categoria> => {
 }
 
 export const postProducto = async ({ codebar, producto, marca, categoria, cantidad, precio }: CreateProducto) => {
-
-  console.log({ categoria, marca })
 
   const fecha = new Date().toISOString()
 
@@ -148,13 +146,22 @@ export const postProducto = async ({ codebar, producto, marca, categoria, cantid
 
 }
 
+export const updateControlStock = async (controlStock: UpdateControlStock[]) => {
+
+  const fecha = new Date().toISOString()
+
+  client.batch(controlStock.map(({cantidad, precio, codebar}) => ({
+      sql: "UPDATE Control_Stock SET cantidad = ?, precio = ?, fecha = ? WHERE producto_id = ?",
+    args: [cantidad, precio, fecha, codebar]
+})))
+
+}
 
 
-
-export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUMN.FECHA, direction = DIRECTION.DESC }: GetProductoParams): Promise<Page<Producto>> => {
+export const getProductos = async ({ page = 0, limit = 20, direction = DIRECTION.DESC }: GetProductoParams): Promise<Page<Producto>> => {
   const offset = page * limit
 
-  const sql: string = `
+  const sqlDesc: string = `
   SELECT 
     Producto.id AS codebar,
     Producto.producto AS producto,
@@ -162,7 +169,8 @@ export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUM
     Categoria.categoria AS categoria,
     Control_Stock.cantidad AS cantidad,
     Control_Stock.precio AS precio,
-    Control_Stock.fecha AS fecha
+    Control_Stock.fecha AS fecha,
+    (SELECT COUNT(*) FROM Producto) AS total
   FROM Producto 
    LEFT JOIN Marca ON Producto.marca_id = Marca.id 
    LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id 
@@ -170,8 +178,25 @@ export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUM
   GROUP BY Producto.id ORDER BY Control_Stock.fecha DESC LIMIT $limit OFFSET $offset;
 `
 
+const sqlAsc: string = `
+  SELECT 
+    Producto.id AS codebar,
+    Producto.producto AS producto,
+    Marca.marca AS marca,
+    Categoria.categoria AS categoria,
+    Control_Stock.cantidad AS cantidad,
+    Control_Stock.precio AS precio,
+    Control_Stock.fecha AS fecha,
+    (SELECT COUNT(*) FROM Producto) AS total
+  FROM Producto 
+   LEFT JOIN Marca ON Producto.marca_id = Marca.id 
+   LEFT JOIN Categoria ON Producto.categoria_id = Categoria.id 
+   LEFT JOIN Control_Stock ON Producto.id = Control_Stock.producto_id
+  GROUP BY Producto.id ORDER BY Control_Stock.fecha ASC LIMIT $limit OFFSET $offset;
+`
+
   const selects = {
-    sql,
+    sql: direction === DIRECTION.DESC ? sqlDesc : sqlAsc,
     args: { limit, offset }
   }
 
@@ -189,14 +214,10 @@ export const getProductos = async ({ page = 0, limit = 20, sort = PRODUCTO_COLUM
 
   const PageOfProductos: Page<Producto> = {
     content: Producto,
-    limit,
     page,
-    offset,
     size: result.rows.length,
-    next: page + 1,
-    preview: Math.max(page - 1, 0),
-    direction,
-    sort
+    limit,
+    total: result.rows[0].total as number
   }
 
   return PageOfProductos
