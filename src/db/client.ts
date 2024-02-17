@@ -45,7 +45,6 @@ const getMarcaByName = async (name: string): Promise<Marca> => {
     marca: row.marca as string,
   }));
 
-  console.log({ MARCA: marcas })
   return marcas
 }
 
@@ -65,7 +64,6 @@ const getCategoriaByName = async (name: string): Promise<Categoria> => {
     categoria: row.categoria as string,
   }));
 
-  console.log({ CATEGORIA: categoria })
   return categoria
 
 }
@@ -106,8 +104,6 @@ export const postProducto = async ({ codebar, producto, marca, categoria, cantid
     categoriaId = categoriaDB.rows[0].id as number
     marcaId = marcaDB.rows[0].id as number
 
-    console.log({ categoriaId, marcaId })
-
     if (await getProducto(codebar) == undefined) {
       await transaction.execute({
         sql: "INSERT INTO Producto (id, producto, marca_id, categoria_id)  VALUES (?, ?, ?, ?)",
@@ -137,7 +133,6 @@ export const postProducto = async ({ codebar, producto, marca, categoria, cantid
 
     await transaction.commit();
   } catch (e) {
-    console.log(e)
     await transaction.rollback()
     throw new Error()
   } finally {
@@ -150,10 +145,10 @@ export const updateControlStock = async (controlStock: UpdateControlStock[]) => 
 
   const fecha = new Date().toISOString()
 
-  client.batch(controlStock.map(({cantidad, precio, codebar}) => ({
-      sql: "UPDATE Control_Stock SET cantidad = ?, precio = ?, fecha = ? WHERE producto_id = ?",
+  client.batch(controlStock.map(({ cantidad, precio, codebar }) => ({
+    sql: "UPDATE Control_Stock SET cantidad = ?, precio = ?, fecha = ? WHERE producto_id = ?",
     args: [cantidad, precio, fecha, codebar]
-})))
+  })))
 
 }
 
@@ -178,7 +173,7 @@ export const getProductos = async ({ page = 0, limit = 20, direction = DIRECTION
   GROUP BY Producto.id ORDER BY Control_Stock.fecha DESC LIMIT $limit OFFSET $offset;
 `
 
-const sqlAsc: string = `
+  const sqlAsc: string = `
   SELECT 
     Producto.id AS codebar,
     Producto.producto AS producto,

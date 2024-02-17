@@ -4,7 +4,7 @@ import { JSX } from "preact";
 interface ButtonProps {
     title?: string,
     onClick?: (event: MouseEvent) => void,
-    children: JSX.Element | string,
+    children: any
     className?: string,
     type: "button" | "submit"
     disabled?: boolean

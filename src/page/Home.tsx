@@ -4,7 +4,6 @@ import { ChangeEvent } from "preact/compat";
 import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
-
 import { CodebarScanner } from "../components/CodebarScanner";
 import { Table } from "../components/Table";
 
@@ -30,13 +29,12 @@ export function Home() {
   }
 
   const getCodeScanner = (code: string) => {
-    setValue(code)
     route(`/${code}`)
   }
 
   return (
-    <main className="w-full py-8 h-screen flex flex-col gap-4">
-      <h1 className="font-bold text-4xl text-gray-900 dark:text-white">D'licia</h1>
+    <main className="h-auto p-4 flex flex-col gap-4">
+      <h1 className="w-full font-bold text-4xl text-gray-900 dark:text-white">D'licia</h1>
       <Button className="max-w-64" type="button" onClick={handleOpen} title="Buscar producto">Buscar Producto</Button>
 
       <Modal isOpen={open} onClose={handleClose} onSubmit={handleSubmit} titleModal="Buscar Producto">
@@ -47,8 +45,7 @@ export function Home() {
         </div>
       </Modal>
 
-      <Table/>
-
+      <Table />
 
     </main>
   )
