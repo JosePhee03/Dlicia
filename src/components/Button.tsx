@@ -1,6 +1,3 @@
-import { JSX } from "preact";
-
-
 interface ButtonProps {
     title?: string,
     onClick?: (event: MouseEvent) => void,
