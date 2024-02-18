@@ -49,10 +49,11 @@ export interface Page<T> {
     size: number
     total: number
 }
-export interface GetProductoParams {
+export interface GetProductosParams {
     page: number,
     limit: number,
     direction?: DIRECTION
+    query?: string
 }
 
 export interface UpdateControlStock {

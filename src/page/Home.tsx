@@ -33,9 +33,11 @@ export function Home() {
   }
 
   return (
-    <main className="h-auto p-4 flex flex-col gap-4">
-      <h1 className="w-full font-bold text-4xl text-gray-900 dark:text-white">D'licia</h1>
-      <Button className="max-w-64" type="button" onClick={handleOpen} title="Buscar producto">Buscar Producto</Button>
+    <main className="h-auto flex flex-col gap-4 lg:gap-8">
+      <div class="flex flex-col gap-2">
+        <h1 className="w-full font-bold text-4xl text-gray-900 dark:text-white">D'licia</h1>
+        <Button className="max-w-64" type="button" onClick={handleOpen} title="Buscar producto">Buscar Producto</Button>
+      </div>
 
       <Modal isOpen={open} onClose={handleClose} onSubmit={handleSubmit} titleModal="Buscar Producto">
         <Input label="Código de barras" onChange={handleChange} type="number" name="barcode" id="input-barcode" value={value} placeholder="77891235438734"></Input>

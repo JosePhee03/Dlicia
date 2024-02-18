@@ -4,6 +4,7 @@ import { Button } from "./Button";
 import { useProductosStore } from "../hooks/useProductosStore";
 import { useControlStock } from "../hooks/useControlStock";
 import { createPortal } from "preact/compat";
+import { Input } from "./Input";
 
 export function Table() {
   const { productos, fetch, isLoading, toggleDirection, direction } = useProductosStore()
@@ -11,9 +12,19 @@ export function Table() {
   const fetchGetProductos = () => fetch()
 
   return (
-    <div class="flex flex-col gap-2 pb-16">
+    <div class="flex flex-col gap-2 md:gap-4 pb-16">
       <AnnouncementProducto />
+      <form class="flex gap-2 items-end" >
+        <div class="relative flex flex-col max-w-sm">
+          <Input id="input-search" label="Buscar producto por nombre" name="input-search" type="text" value="" />
+          <button type="reset" class="inline-block rounded-full p-1 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 absolute bottom-0.5 right-1 ">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 "><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+          </button>
+        </div>
+        <Button className="max-w-16 h-10" type="button" title="Buscar producto">Buscar</Button>
+      </form>
       <div class="flex justify-between items-center flex-wrap">
+
         <TableButtonController />
       </div>
       <div class=" rounded-lg border border-gray-200 dark:border-gray-700">
@@ -56,28 +67,12 @@ export function Table() {
                 </th>
               </tr>
             </thead>
-            {isLoading
-              ? <tbody>
-                <tr>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                  <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
-                </tr>
-              </tbody>
-              : <TBody />
-
-            }
+            <TBody />
           </table>
+          {productos.length === 0 && !isLoading &&
+            <span class="flex w-full items-center justify-center p-4"><Button type="button" onClick={fetchGetProductos}>Cargar Tabla</Button></span>
+          }
         </div>
-        {productos.length === 0 && !isLoading &&
-          <tbody class="flex w-full items-center justify-center p-4"><Button type="button" onClick={fetchGetProductos}>Cargar Tabla</Button></tbody>
-        }
 
       </div>
     </div>
@@ -149,15 +144,27 @@ function AnnouncementProducto() {
 
 function TBody() {
 
-  const { pageProductos: productos } = useProductosStore()
+  const { pageProductos: productos, isLoading } = useProductosStore()
 
   return (
     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-      {productos.map((producto, index) => {
+      {isLoading
+        ?
+        <tr>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+          <td class="px-2 py-4"><div class="w-full animate-pulse rounded bg-slate-700 h-4 "></div></td>
+        </tr>
+        : productos.map((producto, index) => <Row producto={producto} index={index} />)
+      }
 
-        return <Row producto={producto} index={index} />
-      })}
-    </tbody>
+    </tbody >
   )
 }
 
@@ -178,7 +185,6 @@ function Row({ producto, index }: RowProps) {
   const refInputPrecio = useRef<HTMLInputElement>(null)
 
   const { cantidad, categoria, codebar, fecha, marca, precio, producto: nombre } = producto
-  console.log(fecha)
   const fecha2 = new Date(fecha)
 
   const divider = "[&>*]:whitespace-nowrap [&>*]:px-2 [&>*]:py-2"
@@ -319,7 +325,7 @@ function Row({ producto, index }: RowProps) {
 
       </td>
       <td class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 dark:text-white"><input ref={refInputCodebar} readOnly className="bg-transparent max-w-36 px-2 text-gray-700 dark:text-gray-200" type="number" /></td>
-      <td class="whitespace-nowrap px-2 py-2 text-gray-700 dark:text-gray-200"><input value={nombre} readOnly className="text-ellipsis bg-transparent max-w-48 px-2 text-gray-700 dark:text-gray-200" type="text" /></td>
+      <td class="whitespace-nowrap px-2 py-2 text-gray-700 dark:text-gray-200"><input value={nombre} readOnly className="bg-transparent max-w-48 px-2 text-gray-700 dark:text-gray-200" type="text" /></td>
       <td class="whitespace-nowrap px-2 py-2 text-gray-700 dark:text-gray-200">{marca}</td>
       <td class="whitespace-nowrap px-2 py-2 text-gray-700 dark:text-gray-200"><input ref={refInputCantidad} readOnly={!isEditeble} className="bg-transparent max-w-16 px-2 text-gray-700 dark:text-gray-200" type="number" /></td>
       <td class="whitespace-nowrap px-2 py-2 text-gray-700 dark:text-gray-200"><input ref={refInputPrecio} readOnly={!isEditeble} className="bg-transparent max-w-16 px-2 text-gray-700 dark:text-gray-200" type="number" /></td>

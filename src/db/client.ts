@@ -1,5 +1,5 @@
 import { createClient } from "@libsql/client"
-import { Categoria, CreateProducto, DIRECTION, Marca, Producto, Page, GetProductoParams, ControlStock, UpdateControlStock } from "./types-db";
+import { Categoria, CreateProducto, DIRECTION, Marca, Producto, Page, ControlStock, UpdateControlStock, GetProductosParams } from "./types-db";
 
 const client = createClient({
   url: import.meta.env.VITE_DATABASE_URL ?? "",
@@ -153,7 +153,7 @@ export const updateControlStock = async (controlStock: UpdateControlStock[]) => 
 }
 
 
-export const getProductos = async ({ page = 0, limit = 20, direction = DIRECTION.DESC }: GetProductoParams): Promise<Page<Producto>> => {
+export const getProductos = async ({ page = 0, limit = 20, direction = DIRECTION.DESC }: GetProductosParams): Promise<Page<Producto>> => {
   const offset = page * limit
 
   const sqlDesc: string = `

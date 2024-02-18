@@ -81,13 +81,13 @@ export function Codebar(props: CodebarProps) {
 
     return (
         <>
-            <header class="flex gap-4 items-center w-full">
+            <header class="flex gap-4 items-center">
                 <a className="" href="/">
                     <svg className="dark:stroke-white" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
                 </a><h1 class="text-2xl font-bold dark:text-white">Buscar Producto</h1>
 
             </header>
-            <main class="w-full flex flex-col gap-8">
+            <main class="flex flex-col gap-8">
 
                 <form onSubmit={onSubmit} className="flex flex-col gap-4">
 
